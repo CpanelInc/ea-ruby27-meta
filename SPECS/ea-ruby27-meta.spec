@@ -30,7 +30,7 @@ License: GPLv2+
 Source0: README.md
 Source1: LEGAL
 %if 0%{?install_scl}
-Requires: %{scl_prefix}ruby27
+Requires: %{scl_prefix}ruby
 %endif
 BuildRequires: help2man
 BuildRequires: scl-utils-build
