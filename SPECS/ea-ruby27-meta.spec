@@ -16,7 +16,7 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 %{!?install_scl: %global install_scl 1}
 
@@ -73,14 +73,24 @@ packages depending on %scl Software Collection.
 %prep
 %setup -T -c
 
+%if 0%{rhel} < 8
 cat <<EOF | tee enable
 export PATH=%{_bindir}:%{_sbindir}\${PATH:+:\${PATH}}
-export LD_LIBRARY_PATH=%{_libdir}:/opt/cpanel/ea-openssl/%{_lib}\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=%{_libdir}:/opt/cpanel/ea-openssl11/%{_lib}\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
 export MANPATH=%{_mandir}:\$MANPATH
 export PKG_CONFIG_PATH=%{_libdir}/pkgconfig\${PKG_CONFIG_PATH:+:\${PKG_CONFIG_PATH}}
 # For SystemTap.
 export XDG_DATA_DIRS=%{_datadir}:\${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
 EOF
+%else
+cat <<EOF | tee enable
+export PATH=%{_bindir}:%{_sbindir}\${PATH:+:\${PATH}}
+export MANPATH=%{_mandir}:\$MANPATH
+export PKG_CONFIG_PATH=%{_libdir}/pkgconfig\${PKG_CONFIG_PATH:+:\${PKG_CONFIG_PATH}}
+# For SystemTap.
+export XDG_DATA_DIRS=%{_datadir}:\${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+EOF
+%endif
 
 # This section generates README file from a template and creates man page
 # from that file, expanding RPM macros in the template file.
@@ -139,6 +149,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Wed Nov 25 2020 Julian Brown <julian.brown@cpanel.net> - 2.7.1-2
+- ZC-8005: Replace ea-openssl11 with system openssl on C8
+
 * Thu Aug 13 2020 Julian Brown <julian.brown@cpanel.net> - 2.7.1-1
 * Initial commits for Ruby 2.7
 
