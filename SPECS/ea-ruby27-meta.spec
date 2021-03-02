@@ -16,13 +16,13 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 2
+%define release_prefix 1
 
 %{!?install_scl: %global install_scl 1}
 
 Summary: Package that installs %scl
 Name:    %scl_name
-Version: 2.7.1
+Version: 2.7.2
 Release: %{release_prefix}%{?dist}.cpanel
 Vendor:  cPanel, Inc.
 License: GPLv2+
@@ -149,6 +149,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Feb 25 2021 Cory McIntire <cory@cpanel.net> - 2.7.2-1
+- EA-9609: Update ea-ruby27 from v2.7.1 to v2.7.2
+
 * Wed Nov 25 2020 Julian Brown <julian.brown@cpanel.net> - 2.7.1-2
 - ZC-8005: Replace ea-openssl11 with system openssl on C8
 
