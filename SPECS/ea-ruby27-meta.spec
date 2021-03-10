@@ -16,7 +16,7 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 1
+%define release_prefix 6
 
 %{!?install_scl: %global install_scl 1}
 
@@ -41,11 +41,14 @@ This is the main package for %scl Software Collection.
 %package runtime
 Summary: Package that handles %scl Software Collection.
 Requires: scl-utils
+Requires: %{scl}-ruby-devel
 
 %description runtime
 Package shipping essential scripts to work with %scl Software Collection.
 
 %post
+scl enable %{scl} 'gem install irb' || :
+scl enable %{scl} 'gem install racc' || :
 scl enable %{scl} 'gem install bundler' || :
 
 %preun
@@ -149,6 +152,10 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Tue Mar 09 2021 Travis Holloway <t.holloway@cpanel.net> - 2.7.2-6
+- EA-9609: Install racc and irb and require ruby-devel for update to 2.7.2
+  Adjusted release to -6 in order to match ea-ruby27 package
+
 * Thu Feb 25 2021 Cory McIntire <cory@cpanel.net> - 2.7.2-1
 - EA-9609: Update ea-ruby27 from v2.7.1 to v2.7.2
 
