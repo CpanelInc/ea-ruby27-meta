@@ -16,7 +16,7 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 7
+%define release_prefix 8
 
 %{!?install_scl: %global install_scl 1}
 
@@ -47,13 +47,15 @@ Requires: %{scl_prefix}ruby-devel
 Package shipping essential scripts to work with %scl Software Collection.
 
 %post
-scl enable %{scl} 'gem install irb' || :
-scl enable %{scl} 'gem install racc' || :
-scl enable %{scl} 'gem install bundler' || :
+scl enable %{scl} 'gem install irb --no-document' || :
+scl enable %{scl} 'gem install racc --no-document' || :
+scl enable %{scl} 'gem install bundler --no-document' || :
 
 %preun
 
 if [ $1 = 0 ]; then
+    scl enable %{scl} 'gem uninstall irb'  || :
+    scl enable %{scl} 'gem uninstall racc'  || :
     scl enable %{scl} 'gem uninstall bundler'  || :
 fi
 
@@ -152,6 +154,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Tue Jun 08 2021 Travis Holloway <t.holloway@cpanel.net> - 2.7.2-8
+- EA-9801: Reduce time needed to install this package
+
 * Tue May 11 2021 Travis Holloway <t.holloway@cpanel.net> - 2.7.2-7
 - EA-9759: Ensure ruby-devel is properly required
 
