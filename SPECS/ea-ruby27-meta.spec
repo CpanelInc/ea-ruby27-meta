@@ -16,7 +16,7 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 %{!?install_scl: %global install_scl 1}
 
@@ -154,6 +154,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Tue Dec 28 2021 Dan Muey <dan@cpanel.net> - 2.7.5-2
+- ZC-9589: Update DISABLE_BUILD to match OBS
+
 * Wed Nov 24 2021 Travis Holloway <t.holloway@cpanel.net> - 2.7.5-1
 - EA-10301: Update ea-ruby27 from v2.7.4 to v2.7.5
 
