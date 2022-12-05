@@ -22,7 +22,7 @@
 
 Summary: Package that installs %scl
 Name:    %scl_name
-Version: 2.7.6
+Version: 2.7.7
 Release: %{release_prefix}%{?dist}.cpanel
 Vendor:  cPanel, Inc.
 License: GPLv2+
@@ -154,6 +154,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Nov 24 2022 Travis Holloway <t.holloway@cpanel.net> - 2.7.7-1
+- EA-11073: Update ea-ruby27 from v2.7.6 to v2.7.7
+
 * Tue Apr 12 2022 Cory McIntire <cory@cpanel.net> - 2.7.6-1
 - EA-10620: Update ea-ruby27 from v2.7.5 to v2.7.6
 
