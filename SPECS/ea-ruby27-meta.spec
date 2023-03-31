@@ -22,7 +22,7 @@
 
 Summary: Package that installs %scl
 Name:    %scl_name
-Version: 2.7.7
+Version: 2.7.8
 Release: %{release_prefix}%{?dist}.cpanel
 Vendor:  cPanel, Inc.
 License: GPLv2+
@@ -154,6 +154,11 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Fri Mar 31 2023 Cory McIntire <cory@cpanel.net> - 2.7.8-1
+- EA-11327: Update ea-ruby27 from v2.7.7 to v2.7.8
+  CVE-2023-28755: ReDoS vulnerability in URI
+  CVE-2023-28756: ReDoS vulnerability in Time
+
 * Thu Nov 24 2022 Travis Holloway <t.holloway@cpanel.net> - 2.7.7-1
 - EA-11073: Update ea-ruby27 from v2.7.6 to v2.7.7
 
