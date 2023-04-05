@@ -156,6 +156,8 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %changelog
 * Thu Nov 24 2022 Travis Holloway <t.holloway@cpanel.net> - 2.7.7-1
 - EA-11073: Update ea-ruby27 from v2.7.6 to v2.7.7
+  CVE-2023-28755: ReDoS vulnerability in URI
+  CVE-2023-28756: ReDoS vulnerability in Time
 
 * Tue Apr 12 2022 Cory McIntire <cory@cpanel.net> - 2.7.6-1
 - EA-10620: Update ea-ruby27 from v2.7.5 to v2.7.6
