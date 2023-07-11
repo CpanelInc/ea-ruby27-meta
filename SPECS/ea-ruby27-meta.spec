@@ -9,14 +9,11 @@
 %global scl              %{scl_name_prefix}%{scl_name_base}%{scl_name_version}
 %scl_package %scl
 
-# Do not produce empty debuginfo package.
-%global debug_package %{nil}
-
 # Support SCL over NFS.
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 %{!?install_scl: %global install_scl 1}
 
@@ -154,6 +151,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Tue May 09 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 2.7.8-2
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Fri Mar 31 2023 Cory McIntire <cory@cpanel.net> - 2.7.8-1
 - EA-11327: Update ea-ruby27 from v2.7.7 to v2.7.8
   CVE-2023-28755: ReDoS vulnerability in URI
