@@ -13,7 +13,7 @@
 %global nfsmountable 1
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4586 for more details
-%define release_prefix 2
+%define release_prefix 3
 
 %{!?install_scl: %global install_scl 1}
 
@@ -46,7 +46,7 @@ Package shipping essential scripts to work with %scl Software Collection.
 %post
 scl enable %{scl} 'gem install irb --no-document' || :
 scl enable %{scl} 'gem install racc --no-document' || :
-scl enable %{scl} 'gem install bundler --no-document' || :
+scl enable %{scl} 'gem install bundler --no-document -v 2.4.22' || :
 
 %preun
 
@@ -151,6 +151,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Mon Jan 22 2024 Dan Muey <dan@cpanel.net> - 2.7.8-3
+- ZC-11549: Specify bundler version since latest is not compatible w/ 2.7
+
 * Tue May 09 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 2.7.8-2
 - ZC-10936: Clean up Makefile and remove debug-package-nil
 
